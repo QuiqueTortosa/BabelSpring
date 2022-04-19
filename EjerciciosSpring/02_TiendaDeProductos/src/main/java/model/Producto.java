@@ -4,10 +4,10 @@ public class Producto {
 
 	private String nombre;
 	private String seccion;
-	private String precio;
-	private String stock;
+	private double precio;
+	private int stock;
 	
-	public Producto(String nombre, String seccion, String precio, String stock) {
+	public Producto(String nombre, String seccion, double precio, int stock) {
 		super();
 		this.nombre = nombre;
 		this.seccion = seccion;
@@ -26,16 +26,16 @@ public class Producto {
 	public void setSeccion(String seccion) {
 		this.seccion = seccion;
 	}
-	public String getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(String precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	
