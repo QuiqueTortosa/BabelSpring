@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,11 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<center>
-		<form action="Buscador">
-			Cursos:<input type="text" name="curso"><br>
-			<input type="submit" value="Ver alumnos">
-		</form>
+<center>
+		<h1>El usuario ya existe</h1>
 		<br>
 		<a href="inicio.jsp">Inicio</a>
 	</center>

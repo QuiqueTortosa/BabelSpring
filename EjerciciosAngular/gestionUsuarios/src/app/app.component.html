@@ -1,0 +1,20 @@
+<div class="container">
+  <ul *ngFor="let c of ListCurso">
+    <div style="display:flex;">
+      <h1>{{c}}</h1>
+      <button (click)="busqueda(c)">Buscar</button>
+    </div>
+  </ul>
+
+  <br><br>
+  <table border="1" >
+    <thead><tr><th>Nombre</th><th>Curso</th><th>Nota</th></tr></thead>
+    <tbody >
+      <tr *ngFor="let a of alumnos">
+        <td>{{a.nombre}}</td><td>{{a.cursos}}</td><td>{{a.nota}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <a href="inicio.jsp">Volver</a>
+</div>

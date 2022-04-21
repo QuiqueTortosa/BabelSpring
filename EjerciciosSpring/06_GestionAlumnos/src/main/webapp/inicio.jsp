@@ -5,6 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hola</h1>
+	<center>
+		<a href="datos.jsp">Búsquedas</a><br>
+		<a href="alta.jsp">Altas</a><br>
+	</center>
 </body>
 </html>

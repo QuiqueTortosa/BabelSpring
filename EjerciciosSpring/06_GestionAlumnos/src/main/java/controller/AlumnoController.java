@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import model.Alumno;
 import service.AlumnoService;
 
+@CrossOrigin("*")
 @Controller
 public class AlumnoController {
 	
@@ -27,9 +29,20 @@ public class AlumnoController {
 		return alumnoService.buscarPorCurso(curso);
 	}
 	
+	@GetMapping(value="Cursos", produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<String> buscar() {
+		System.out.println("******************************");
+		System.out.println(alumnoService.cursos());
+		return alumnoService.cursos();
+	}
+	
 	@PostMapping(value = "Alta")
 	public String añadirAlumno(@ModelAttribute Alumno alumno) {
-		alumnoService.altaAlumno(alumno);
-		return "datos";
+		if(!alumnoService.existeAlumno(alumno.getNombre())) {
+			alumnoService.altaAlumno(alumno);
+			return "inicio";
+		}else {	
+			return "error";
+		}
 	}
 }
