@@ -24,7 +24,8 @@ public class AlumnoServiceImpl implements AlumnoService{
 		String jpql = "select a from Alumno a where a.cursos=:cursos";
 		TypedQuery<Alumno> query = entityManager.createQuery(jpql, Alumno.class);
 		query.setParameter("cursos", cursos);
-		return query.getResultList();
+		List<Alumno> alumnos = query.getResultList();
+		return alumnos.size()>0?alumnos:null;	
 	}
 
 	@Transactional
@@ -53,7 +54,8 @@ public class AlumnoServiceImpl implements AlumnoService{
 	public List<String> cursos() {
 		String jpql = "select distinct(cursos) from Alumno";
 		TypedQuery<String> query = entityManager.createQuery(jpql, String.class);
-		return query.getResultList();
+		List<String> cursos = query.getResultList();
+		return cursos.size()>0?cursos:null;		
 	}
 		
 }
