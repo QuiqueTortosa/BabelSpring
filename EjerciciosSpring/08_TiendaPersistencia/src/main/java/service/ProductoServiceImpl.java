@@ -39,10 +39,10 @@ public class ProductoServiceImpl implements ProductoService{
 	@Override
 	public void modificarP(String nombre, double nPrecio) {
 		String jpql = "update from Producto p set p.precio=:precio where p.nombre=:nombre";
-		Query qr = entityManager.createQuery(jpql);
-		qr.setParameter("precio", nPrecio);
-		qr.setParameter("nombre", nombre);
-		qr.executeUpdate();
+		Query query = entityManager.createQuery(jpql);
+		query.setParameter("precio", nPrecio);
+		query.setParameter("nombre", nombre);
+		query.executeUpdate();
 	}
 
 	@Transactional
@@ -58,5 +58,14 @@ public class ProductoServiceImpl implements ProductoService{
 	public Producto buscarProducto(int id) {
 		return entityManager.find(Producto.class, id); //find es solo por primary key
 	}	
+	
+	@Override
+	public Producto buscarProducto(String nombre) {
+		String jpql = "select p from Producto p where p.nombre=:nombre";
+		TypedQuery<Producto> query = entityManager.createQuery(jpql, Producto.class);
+		query.setParameter("nombre", nombre);
+		List<Producto> productos = query.getResultList();
+		return productos.size()>0?productos.get(0):null;
+	}
 	
 }

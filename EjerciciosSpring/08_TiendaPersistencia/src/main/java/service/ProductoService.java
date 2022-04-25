@@ -11,5 +11,6 @@ public interface ProductoService {
 	void modificarP(String nombre, double nPrecio);
 	void eliminarP(String nombre);
 	Producto buscarProducto(int id);
+	Producto buscarProducto(String nombre);
 	
 }
