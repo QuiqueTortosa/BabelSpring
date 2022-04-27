@@ -1,5 +1,7 @@
 package config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement //Habilitar la transaccionalidad mediante anotaciones 
 @PropertySource(value = "classpath:/config/application.properties")
 @Configuration
-@ComponentScan(basePackages = { "service" })
+@ComponentScan(basePackages = { "service","dao" })
 public class ServiceConfig {
 
 	@Value("${driver}")
@@ -57,6 +59,9 @@ public class ServiceConfig {
 		factory.setPersistenceUnitName("gestionUsuariosPU"); //nombre de la unidad de persistencia
 		factory.setDataSource(dataSource); //Dato de conexion a la bdd
 		factory.setPackagesToScan("model");
+		Properties props=new Properties();
+		props.put("hibernate.enable_lazy_load_no_trans", true);
+		factory.setJpaProperties(props);
 		factory.setJpaVendorAdapter(adapter);
 		return factory;
 	}
