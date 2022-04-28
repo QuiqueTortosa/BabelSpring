@@ -10,6 +10,8 @@
   	<lombok.version>1.18.22</lombok.version>
   	<jackson.version>2.13.0</jackson.version>
   	<mockito.version>3.2.4</mockito.version>
+  	<springjpa.version>2.6.1</springjpa.version>
+
   </properties>
   <dependencies>
  	<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
