@@ -16,8 +16,9 @@ import lombok.Setter;
 @Getter
 @EqualsAndHashCode //para meter equals y hashcode
 @Embeddable
-public class MatriculaPk implements Serializable{
+public class TitularPk implements Serializable{
+
+	private int idCliente;
+	private int idCuenta;
 	
-	private int idCurso;
-	private String usuario;
 }
