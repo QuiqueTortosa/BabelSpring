@@ -1,0 +1,13 @@
+<div class="center">
+  <div class="column">
+    <h1>Alta alumno</h1>
+    <form class="flex" (ngSubmit)="altaAlumno()">
+      <input type="text" placeholder="usuario"  name="usuario" [(ngModel)]="usuario">
+      <input type="text" placeholder="password"  name="password" [(ngModel)]="password">
+      <input type="text" placeholder="nombre" name="nombre" [(ngModel)]="nombre">
+      <input type="text" placeholder="email" name="email" [(ngModel)]="email">
+      <input type="text" placeholder="edad" name="edad" [(ngModel)]="edad">
+      <button>Dar de alta</button>
+    </form>
+  </div>
+</div>

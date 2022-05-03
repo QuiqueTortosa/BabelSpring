@@ -1,0 +1,15 @@
+<div>
+  <h1>Alumnos</h1>
+  <select name="Alumno" id="alumno" [(ngModel)]="alumno">
+    <option *ngFor="let a of alumnosList" [ngValue]="a.usuario">{{a.usuario}}</option>
+  </select> 
+  <button (click)="findCursosByAlumno(alumno)">Buscar</button>
+  <table border="1" *ngIf="cursosList">
+    <thead><tr><th>ID</th><th>Nomre</th><th>Precio</th><th>Duracion</th><th>Fecha de Inicio</th></thead>
+    <tbody >
+      <tr *ngFor="let c of cursosList">
+        <td>{{c.idCurso}}</td><td>{{c.nombre}}</td><td>{{c.precio}}</td><td>{{c.duracion}}</td><td>{{toDatee(c.fechaInicio)}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

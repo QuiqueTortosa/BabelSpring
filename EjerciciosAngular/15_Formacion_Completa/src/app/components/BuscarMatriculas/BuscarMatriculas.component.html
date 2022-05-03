@@ -1,0 +1,18 @@
+<div class="center">
+  <div class="column">
+    <h1>Buscar Matricula</h1>
+    <form class="flex" (ngSubmit)="buscarMatricula()">
+      <input type="date" placeholder="Fecha Inicio" name="start" [(ngModel)]="start">
+      <input type="date" placeholder="Fecha Fin" name="end" [(ngModel)]="end">
+     <button>Buscar</button>
+    </form>
+    <table border="1" *ngIf="matriculasList">
+      <thead><tr><th>Curso</th><th>Fecha Inicio</th><th>Alumno Inscrito </th></thead>
+      <tbody >
+        <tr *ngFor="let m of matriculasList">
+          <td>{{m.cursoDto.nombre}}</td><td>{{toDatee(m.cursoDto.fechaInicio)}}</td><td>{{m.alumnoDto.usuario}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

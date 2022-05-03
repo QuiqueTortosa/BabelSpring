@@ -1,0 +1,16 @@
+<div class="center">
+  <div class="column">
+    <h1>Matricula</h1>
+    <form class="flex" (ngSubmit)="altaMatricula()">
+      <div>
+        <select name="Alumno" id="alumno" [(ngModel)]="usuario">
+          <option *ngFor="let a of alumnosList" [ngValue]="a.usuario">{{a.usuario}}</option>
+        </select>
+        <select name="Curso" id="curso" [(ngModel)]="idCurso">
+          <option *ngFor="let c of cursosList" [ngValue]="c.idCurso">{{c.nombre}}</option>
+        </select>  
+     </div>
+     <button>Matricular</button>
+    </form>
+  </div>
+</div>
