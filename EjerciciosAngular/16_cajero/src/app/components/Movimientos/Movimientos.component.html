@@ -1,0 +1,25 @@
+<div class="center">
+  <div class="column">
+    <h1>Buscar Movimientos</h1>
+    <form class="flex" (ngSubmit)="buscarMovimientos()">
+      <div class="between">
+        <label>Desde</label>
+       <input type="date" placeholder="Fecha Inicio" name="start" [(ngModel)]="start">
+      </div>
+      <div class="between">
+        <label>Hasta</label>
+        <input type="date" placeholder="Fecha Fin" name="end" [(ngModel)]="end">
+      </div>
+      <label>Saldo:{{cuenta.saldo}}</label>
+     <button>Buscar</button>
+    </form>
+    <table border="1" *ngIf="movimientoList">
+      <thead><tr><th>Cantidad</th><th>Operacion</th><th>Fecha</th></thead>
+      <tbody >
+        <tr *ngFor="let m of movimientoList">
+          <td>{{m.cantidad}}</td><td>{{m.operacion}}</td><td>{{toDatee(m.fecha)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

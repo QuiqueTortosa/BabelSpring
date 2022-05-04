@@ -26,11 +26,13 @@ public class CajeroController {
 	
 	@Autowired
 	CajeroService cajeroService;
+	int nmCuenta = 0;
 	
 	@PostMapping(value="Cuenta")
-	public String buscarCuenta(@RequestParam("nmCuenta")int nmCuenta, HttpSession sesion, HttpServletRequest request) {
+	public String login(@RequestParam("nmCuenta")int nmCuenta, HttpSession sesion, HttpServletRequest request) {
 		CuentaDto cuenta = cajeroService.buscarCuenta(nmCuenta);
 		if(cuenta != null) {
+			this.nmCuenta = nmCuenta;
 			sesion.setAttribute("cuenta", cuenta);
 			return "menu";
 			}
@@ -39,10 +41,11 @@ public class CajeroController {
 			return "error";
 		}
 	}
-	
+
 	@PostMapping(value="Ingreso")
-	public String ingresar(@RequestParam("nmCuenta")int nmCuenta, @RequestParam("cantidad")int cantidad) {
-		boolean ingresado = cajeroService.ingresar(nmCuenta,cantidad);
+	public String ingresar(@RequestParam("cantidad")int cantidad) {
+		System.out.println(this.nmCuenta);
+		boolean ingresado = cajeroService.ingresar(this.nmCuenta,cantidad);
 		if(ingresado) {
 			return "menu";
 			}
@@ -52,9 +55,9 @@ public class CajeroController {
 	}
 	
 	@PostMapping(value="Extracto")
-	public String extraccion(@RequestParam("nmCuenta")int nmCuenta, @RequestParam("cantidad")int cantidad) {
-		boolean ingresado = cajeroService.extraccion(nmCuenta,cantidad);
-		if(ingresado) {
+	public String extraccion(@RequestParam("cantidad")int cantidad) {
+		boolean extraido = cajeroService.extraccion(this.nmCuenta,cantidad);
+		if(extraido) {
 			return "menu";
 			}
 		else {
@@ -63,9 +66,9 @@ public class CajeroController {
 	}
 	
 	@PostMapping(value="Transferencia")
-	public String extraccion(@RequestParam("nmCuenta")int nmCuenta, @RequestParam("toNmCuenta")int toNmCuenta, @RequestParam("cantidad")int cantidad) {
-		boolean ingresado = cajeroService.transferencia(nmCuenta,toNmCuenta,cantidad);
-		if(ingresado) {
+	public String transferencia(@RequestParam("toNmCuenta")int toNmCuenta, @RequestParam("cantidad")int cantidad) {
+		boolean transferido = cajeroService.transferencia(this.nmCuenta,toNmCuenta,cantidad);
+		if(transferido) {
 			return "menu";
 			}
 		else {
@@ -75,9 +78,15 @@ public class CajeroController {
 	
 	
 	@GetMapping(value = "ConsultaMovimientos", produces = MediaType.APPLICATION_JSON_VALUE )
-	public @ResponseBody List<MovimientoDto> movimientos(@RequestParam("nmCuenta")int nmCuenta, @DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("start") Date start,
+	public @ResponseBody List<MovimientoDto> movimientos(@DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("start") Date start,
 			@DateTimeFormat(pattern ="yyyy-MM-dd") @RequestParam("end") Date end) {
 		
-		return cajeroService.consultarMovimientos(nmCuenta, start, end);
+		return cajeroService.consultarMovimientos(this.nmCuenta, start, end);
+	}
+	
+	@GetMapping(value="Cuenta")
+	public @ResponseBody CuentaDto buscarCuenta() {
+		CuentaDto cuenta = cajeroService.buscarCuenta(this.nmCuenta);
+		return cuenta!=null?cuenta:null;
 	}
 }

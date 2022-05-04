@@ -1,0 +1,13 @@
+<div class="center">
+  <div class="column">
+    <h1>Ingresar</h1>
+    <form class="flex" (ngSubmit)="ingresar()">
+      <div class="between">
+        <label>Cantidad: </label>
+       <input type="number" placeholder="cantidad"  name="cantidad" [(ngModel)]="cantidad">
+      </div>
+      <button>Ingresar</button>
+      <p *ngIf="mensaje.length > 1">{{mensaje}}</p>
+    </form>
+  </div>
+</div>

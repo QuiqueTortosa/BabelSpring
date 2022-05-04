@@ -91,7 +91,7 @@ public class CajeroServiceImpl implements CajeroService{
 
 	@Override
 	public List<MovimientoDto> consultarMovimientos(int nmCuenta, Date start, Date end) {
-		return movimientosDao.findByMovimientoFechas(nmCuenta,start, end)
+		return movimientosDao.findByCuentaNumeroCuentaAndFechaBetween(nmCuenta,start, end)
 				.stream()
 				.map(m->conversor.movimientoToDto(m))
 				.collect(Collectors.toList());

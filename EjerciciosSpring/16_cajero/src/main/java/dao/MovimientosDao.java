@@ -10,7 +10,5 @@ import model.Movimiento;
 
 public interface MovimientosDao extends JpaRepository<Movimiento, Integer>{
 
-	@Query("select m from Movimiento m where m.cuenta.numeroCuenta=?1 and m.fecha between ?2 and ?3")
-	List<Movimiento> findByMovimientoFechas(int nmCuenta, Date f1, Date f2);
-	
+	List<Movimiento> findByCuentaNumeroCuentaAndFechaBetween(int idCuenta, Date inicio, Date fin);
 }

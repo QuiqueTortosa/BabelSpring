@@ -1,0 +1,23 @@
+.center {
+    display:flex;
+    justify-content:center;
+}
+.column {
+    display:flex;
+    flex-direction: column;
+}
+
+.flex{
+    width:300px;
+    display:flex;
+    flex-direction: column;
+}
+
+p{
+    color: red;
+}
+
+.between{
+    display: flex;
+    justify-content: space-between;
+}

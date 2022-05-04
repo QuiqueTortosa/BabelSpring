@@ -8,20 +8,14 @@
 <link rel="stylesheet">
 </head>
 <body>
-	
-			<h1>ACCESO A BANCA</h1>
-
-			<div id="divContentDer">
-
+			<h1>Acceso al Cajero</h1>
+			<div>
 				<form action="Cuenta" method="post">
-				
 					<h2>Numero de Cuenta</h2>
-					<span><input class="inputWidth"type="number" name="nmCuenta" placeholder="Numero De Cuenta" required /></span>
+					<span><input type="number" name="nmCuenta" placeholder="Numero De Cuenta" required /></span>
 					<h2>Acceder</h2>
-					<span><input class="inputSubmit" type="submit" value="Acceder" /></span>
-
+					<span><input type="submit" value="Acceder" /></span>
 				</form>
-
 			</div>
 </body>
 </html>

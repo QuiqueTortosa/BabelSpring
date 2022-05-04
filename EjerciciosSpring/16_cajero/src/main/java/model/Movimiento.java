@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +32,8 @@ public class Movimiento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idMovimiento;
 	private int idCuenta;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern="yyyy-MM-dd@HH:mm:ss")
 	private Date fecha;
 	private int cantidad;
 	private String operacion;

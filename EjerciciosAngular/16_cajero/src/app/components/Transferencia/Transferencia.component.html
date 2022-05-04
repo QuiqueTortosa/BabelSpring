@@ -1,0 +1,17 @@
+<div class="center">
+  <div class="column">
+    <h1>Transferir</h1>
+    <form class="flex" (ngSubmit)="transferir()">
+      <div class="between">
+        <label>Cuenta destino: </label>
+        <input type="number" placeholder="Numero de cuenta"  name="nmCuenta" [(ngModel)]="nmCuenta">
+      </div>
+      <div class="between">
+        <label>Cantidad: </label>
+        <input type="number" placeholder="cantidad"  name="cantidad" [(ngModel)]="cantidad">
+      </div>
+      <button>Transferir</button>
+      <p *ngIf="mensaje.length > 1">{{mensaje}}</p>
+    </form>
+  </div>
+</div>
