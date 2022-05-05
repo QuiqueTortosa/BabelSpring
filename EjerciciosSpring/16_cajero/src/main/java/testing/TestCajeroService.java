@@ -22,8 +22,7 @@ public class TestCajeroService {
 	@Autowired 
 	CajeroService cajeroS;
 	
-	@Test void testValidaraCuenta() {
-		
+	@Test void testBuscarCuenta() {
 		assertNotEquals(null,cajeroS.buscarCuenta(1000));
 		assertNotNull(cajeroS.buscarCuenta(1000));
 	}
