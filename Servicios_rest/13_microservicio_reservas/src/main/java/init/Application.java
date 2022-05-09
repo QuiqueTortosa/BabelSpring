@@ -19,6 +19,8 @@ public class Application {
 	
 	@Bean
     public RestTemplate template() {
+		//para proporcionar los credenciales de forma basica en Authorization
+		//utilizamos un interceptor
         BasicAuthenticationInterceptor intercep = new BasicAuthenticationInterceptor("admin", "admin");
         RestTemplate template = new RestTemplate();
         template.getInterceptors().add(intercep);
