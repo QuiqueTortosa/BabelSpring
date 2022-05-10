@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		//y para eliminar, tendrán que estar autenticados
  		.antMatchers(HttpMethod.GET,"/Reserva/*").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET,"/Reservas").hasRole("ADMIN")
-		.antMatchers(HttpMethod.POST,"/Reserva/*").anonymous()
+		.antMatchers(HttpMethod.POST,"/Reserva").anonymous()
 		.antMatchers(HttpMethod.PUT,"/Reserva").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE,"/Reserva/*").hasRole("OPERATOR")
 		.and()
