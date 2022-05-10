@@ -31,8 +31,8 @@ public class VuelosController {
 		return service.buscarVuelo(idVuelo);
 	}
 	
-	@PutMapping(value="Vuelo",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String actualizar(@RequestParam("idVuelo") int idVuelo,@RequestParam("plazas") int plazas) {
+	@PutMapping(value="Vuelo/{idVuelo}/{plazas}",produces=MediaType.APPLICATION_JSON_VALUE)
+	public String actualizar(@PathVariable("idVuelo") int idVuelo,@PathVariable("plazas") int plazas) {
 		return String.valueOf(service.actualizarVuelo(idVuelo, plazas));
 	}
 	

@@ -4,6 +4,8 @@ package service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,10 +32,16 @@ public class ReservasServiceImpl implements ReservasService{
 	@Override
 	public void reservar(ReservaDto reservaDto) {
 		Hotel hotel = template.getForObject(urlHotel+"/Hotel/find/"+reservaDto.getHotel(), Hotel.class);
-		Vuelo vuelo = template.getForObject(urlVuelo+"/Vuelos/find/"+reservaDto.getVuelo(), Vuelo.class);
-		if(hotel!=null && vuelo.getPlazas() >= reservaDto.getPlazas()) {
+		ResponseEntity<String> response = template.exchange(
+							urlVuelo+"/Vuelo/{idVuelo}/{plazas}",
+							HttpMethod.PUT,
+							null,
+							String.class,
+							reservaDto.getVuelo(),
+							reservaDto.getPlazas());
+		String cuerpo = response.getBody();
+		if(hotel != null && cuerpo.equals("true")) {
 			Reserva reserva = new Reserva(reservaDto.getIdReserva(),reservaDto.getNombre(),reservaDto.getDni(),reservaDto.getHotel(),reservaDto.getVuelo());
-			template.put(urlVuelo+"/Vuelo/"+"?idVuelo="+reservaDto.getVuelo()+"&plazas="+reservaDto.getPlazas(),null);
 			reservasDao.save(reserva);
 		}
 	}
