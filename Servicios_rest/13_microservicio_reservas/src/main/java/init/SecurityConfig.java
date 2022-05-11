@@ -1,13 +1,7 @@
 package init;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -16,34 +10,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		return super.authenticationManagerBean();
-	}
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		/*auth
+		auth
         .inMemoryAuthentication()
-        .withUser("test1")
-          .password("{noop}test1") //lo de {noop} se pone para no obligar a usar mecanismo de encriptación
-          .roles("TEST")
+        .withUser("user1")
+          .password("{noop}user1") //lo de {noop} se pone para no obligar a usar mecanismo de encriptación
+          .roles("USER")
           .and()
-        .withUser("test2")
-          .password("{noop}test2") //lo de {noop} se pone para no obligar a usar mecanismo de encriptación
-          .roles("TEST")
+        .withUser("admin")
+          .password("{noop}admin")
+          .roles("USER", "ADMIN")
           .and()
-        .withUser("test3")
-          .password("{noop}test3")
-          .roles("MASTER")
-          .and()
-        .withUser("test4")
-          .password("{noop}test4")
-          .roles("USERS");
-         */
-		
+        .withUser("user2")
+          .password("{noop}user2")
+          .roles("OPERATOR");
+
 		/*lo siguiente sería para el caso de que
 		 * quisiéramos encriptar la password:
 		String pw1=new BCryptPasswordEncoder().encode("user1");
@@ -60,13 +42,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	          .roles("USER", "ADMIN");
 		 */
 		/*la siguiente configuración será para el caso de 
-		 * usuarios en una base de datos*/
-		  auth.jdbcAuthentication().dataSource(dataSource())
-        	.usersByUsernameQuery("select user, pwd, enabled"
-            	+ " from users where user=?")
-        	.authoritiesByUsernameQuery("select user, rol "
-            	+ "from roles where user=?");
-		 
+		 * usuarios en una base de datos
+		 * auth.jdbcAuthentication().dataSource(dataSource)
+        	.usersByUsernameQuery("select username, password, enabled"
+            	+ " from users where username=?")
+        	.authoritiesByUsernameQuery("select username, authority "
+            	+ "from authorities where username=?");
+		 */
 	}
 
 	@Override
@@ -74,26 +56,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 		.authorizeRequests()
 		//solo los miembros del rol admin podrán realizar altas
-		//y para eliminar, tendrán que estar autenticados
- 		.antMatchers(HttpMethod.GET,"/Reserva/*").hasRole("ADMIN")
+		//y para acceder la lista de cursos, tendrán que estar autenticados
+
+		.antMatchers(HttpMethod.GET,"/Reserva/*").hasRole("ADMIN")
 		.antMatchers(HttpMethod.GET,"/Reservas").hasRole("ADMIN")
 		.antMatchers(HttpMethod.POST,"/Reserva/*").anonymous()
 		.antMatchers(HttpMethod.PUT,"/Reserva").hasRole("ADMIN")
 		.antMatchers(HttpMethod.DELETE,"/Reserva/*").hasRole("OPERATOR")
 		.and()
-		.httpBasic(); //forma de solicitar los credenciales		.and()
-	}
-	
-	
-	private DataSource dataSource() {
-		DriverManagerDataSource ds=new DriverManagerDataSource();
-		ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		ds.setUrl("jdbc:mysql://localhost:3306/viajes?serverTimezone=UTC");
-		ds.setUsername("root");
-		ds.setPassword("");
-		return ds;
+		.httpBasic(); //forma de solicitar los credenciales
 	}
 
 }
-
 
