@@ -1,10 +1,10 @@
 server:
-  port: 8002
+  port: 8000
   servlet:
-    context-path: /reservas
+    context-path: /hoteles
 spring:
   application:
-    name: servicio-reservas
+    name: servicio-hoteles
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: ''

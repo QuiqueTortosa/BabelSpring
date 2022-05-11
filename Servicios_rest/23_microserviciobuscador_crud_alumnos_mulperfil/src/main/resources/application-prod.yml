@@ -1,15 +1,15 @@
 server:
-  port: 8002
+  port: 8000
   servlet:
-    context-path: /reservas
+    context-path: /crud
 spring:
   application:
-    name: servicio-reservas
+    name: servicio-alumnos
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: ''
-    url: jdbc:mysql://localhost:3306/viajes?serverTimezone=UTC
-    username: root
+    password: __&&&345
+    url: jdbc:mysql://178.23.40.15:3306/academia?serverTimezone=UTC
+    username: prod
   jpa:
     hibernate:
       naming:
@@ -18,4 +18,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://200.100.20.35:6666/eureka

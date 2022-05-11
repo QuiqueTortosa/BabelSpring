@@ -1,14 +1,14 @@
 server:
-  port: 8002
+  port: 8000
   servlet:
-    context-path: /reservas
+    context-path: /crud
 spring:
   application:
-    name: servicio-reservas
+    name: servicio-alumnos
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: ''
-    url: jdbc:mysql://localhost:3306/viajes?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/academia?serverTimezone=UTC
     username: root
   jpa:
     hibernate:
