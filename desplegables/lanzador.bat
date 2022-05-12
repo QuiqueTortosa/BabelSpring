@@ -1,0 +1,1 @@
+java -jar micro_estudiantes.jar --PASS=admin
