@@ -1,4 +1,4 @@
 export class CredentialsDto {
-    user:string,
-    pwd:string
+    user:string;
+    pwd:string;
 }

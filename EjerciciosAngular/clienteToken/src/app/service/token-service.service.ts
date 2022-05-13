@@ -8,38 +8,30 @@ import { Student } from '../model/Student';
 })
 export class TokenServiceService {
 
-  urlBase:string = "http://localhost:8000/crud";
-  token: string | undefined;
-  user:string = "admin";
-  pwd:string = "admin";
-  
-  constructor(private http:HttpClient) {
-
-   }
-
+  urlBase:string="http://localhost:8000/crud";
+  token:string;
+  user:string="admin";
+  pwd:string="admin";
+  constructor( private http:HttpClient) {
+    this.getToken();
+  }
   getToken(){
-    let dto:CredentialsDto = new CredentialsDto();
+    let dto:CredentialsDto =new CredentialsDto();
     dto.pwd=this.pwd;
     dto.user=this.user;
-    this.http.post<string>(this.urlBase+"/login",dto).subscribe(data=> this.token = data)
+    this.http.post(this.urlBase+"/login",dto,{responseType:"text"}).subscribe(tk=>this.token=tk);
+
   }
 
   getStudentId(idAlumno:number){
-    if(this.token == undefined){
-      this.getToken
-    }
-    let heads: HttpHeaders = new HttpHeaders();
-    heads.append("Authorization", "Bearer "+this.token);
-    return this.http.get<Student>(this.urlBase+"/Alumno"+idAlumno,{headers: heads})
+    //con append y set no funciona
+    let heads:HttpHeaders=new HttpHeaders({"Authorization":"Bearer "+this.token});
+    return this.http.get<Student>(this.urlBase+"/Alumno/"+idAlumno,{headers:heads});
   }
-
   getStudents(){
-    if(this.token == undefined){
-      this.getToken
-    }
-    let heads: HttpHeaders = new HttpHeaders();
-    heads.append("Authorization", "Bearer "+this.token);
-    return this.http.get<Student[]>(this.urlBase+"/Alumnos",{headers: heads})
+    let heads:HttpHeaders=new HttpHeaders({"Authorization":"Bearer "+this.token});
+    return this.http.get<Student[]>(this.urlBase+"/Alumnos",{headers:heads});
+
   }
 
 }
