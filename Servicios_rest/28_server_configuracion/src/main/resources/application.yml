@@ -6,6 +6,10 @@ spring:
       server:
         git:
           uri: https://github.com/QuiqueTortosa/servicios_config
+        #native:
+        #  search-locations:
+        #  - file:///c:\temp\config
+        
         default-label: main
           
              

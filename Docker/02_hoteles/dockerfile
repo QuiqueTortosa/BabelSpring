@@ -1,0 +1,9 @@
+FROM openjdk
+ADD hoteles.jar servicios/hoteles.jar
+ENV hostconfig=192.168.1.12
+ENV hostdb=192.168.1.12
+ENV hostreal=192.168.1.12
+ENV hostseureka=192.168.1.12
+ENV portdb=3306
+
+ENTRYPOINT java -jar servicios/hoteles.jar
