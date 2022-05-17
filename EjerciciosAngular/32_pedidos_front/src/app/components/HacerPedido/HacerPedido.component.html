@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="pedido">
+    <p><strong>Producto</strong></p>
+    <select class="input" [(ngModel)]="productoSeleccionado">
+      <option *ngFor="let p of productos" [ngValue]="p">{{p.producto}}</option>
+    </select>
+    <br>
+    <p><strong>Unidades</strong></p>
+    <input type="number" class="input" [(ngModel)]="unidades">
+    <div>
+      <button (click)="resultados()">Confirmar pedido</button>
+    </div>
+    <p class="alerta" *ngIf="realizado">Pedido realizado</p>
+  </div>
+  <div class="margin" *ngIf="productoSeleccionado">
+    <h2>Datos del pedidio</h2>
+    <br><br>
+    <p>Producto: {{productoSeleccionado.codigoProducto}}</p>
+    <p>Unidades: {{unidades}}</p>
+  </div>
+</div>

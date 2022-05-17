@@ -1,0 +1,34 @@
+.container {
+    display:flex;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.input {
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pedido {
+    padding: 30px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #34D399;
+}
+
+.alerta {
+    color: #B91C1C;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.margin {
+    margin-left: 50px;
+    padding: 30px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #34D399;
+}
+

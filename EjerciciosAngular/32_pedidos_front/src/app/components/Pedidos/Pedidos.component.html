@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Pedidos</h1>
+  <br><br>
+  <table border="1" *ngIf="pedidos">
+    <thead><tr><th>Numero de pedido</th><th>Producto</th><th>Total</th><th>Fecha pedido</th></thead>
+    <tbody >
+      <tr *ngFor="let p of pedidos">
+        <td>{{p.idPedido}}</td><td>{{p.codigoProducto}}</td><td>{{p.total}}</td><td>{{toDate(p.fechaPedido)}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+</div>

@@ -1,0 +1,25 @@
+::ng-deep * {
+      
+    margin: 0;
+    padding: 0;
+  }
+
+.flexHeader {
+    background-color: #31D1F4;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.routerLink {
+    padding: 0 40px;
+    color: black;
+    font-size: 14px;
+    text-decoration: none
+}
+.routerLink:hover {
+    font-size: 15px;
+}
