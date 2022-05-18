@@ -1,0 +1,15 @@
+version: "2"
+services:
+  sproductos:
+    build: ./04_productos
+    ports:
+    - 8000:8000
+    environment:
+    - host=192.168.1.12  #dirección del host que aloja el contenedor
+  sreservas:
+    build: ./03_pedidos
+    ports:
+    - 7000:7000
+    environment:
+    - host=192.168.1.12
+    

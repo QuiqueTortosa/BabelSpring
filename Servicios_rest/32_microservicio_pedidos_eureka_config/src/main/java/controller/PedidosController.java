@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,13 +25,17 @@ public class PedidosController {
 	PedidosService service;
 	
 	@PostMapping(value="",consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void pedir(@RequestBody Pedido pedido) {
-		service.pedido(pedido);
+	public ResponseEntity<Void> pedir(@RequestBody Pedido pedido) {
+		if(service.pedido(pedido)) {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
 	}
 	
 	@GetMapping(value="",produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Pedido> pedidos(){
-		return service.todosLosPedidos();
+	public ResponseEntity<List<Pedido>> pedidos(){
+		return new ResponseEntity <>(service.todosLosPedidos(),HttpStatus.OK);
 	}
 	
 }

@@ -3,7 +3,9 @@ package controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,18 +23,21 @@ public class ProductosController {
 	ProductosService service;
 	
 	@GetMapping(value ="/{codigo}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public double precioUnitarioProducto(@PathVariable("codigo") int codigoProducto){
-		return service.precioUnitarioProducto(codigoProducto);
+	public ResponseEntity<Double> precioUnitarioProducto(@PathVariable("codigo") int codigoProducto){
+		return new ResponseEntity <>(service.precioUnitarioProducto(codigoProducto), HttpStatus.OK);
 	}
 	
 	@GetMapping(value ="",produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Producto> buscarProductosExistentes(){
-		return service.productosExistentes();
+	public  ResponseEntity<List<Producto>> buscarProductosExistentes(){
+		return new ResponseEntity <>(service.productosExistentes(), HttpStatus.OK);
 	}
 	
 	@PutMapping(value="/{codigo}/{unidades}",produces=MediaType.APPLICATION_JSON_VALUE)
-	public String actualizar(@PathVariable("codigo") int codigoProducto,@PathVariable("unidades") int unidades) {
-		return String.valueOf(service.actualizarProducto(codigoProducto, unidades));
+	public ResponseEntity<Void> actualizar(@PathVariable("codigo") int codigoProducto,@PathVariable("unidades") int unidades) {
+		if(service.actualizarProducto(codigoProducto, unidades)) {
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.PRECONDITION_FAILED);
 	}
 	
 }
